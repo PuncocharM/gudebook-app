@@ -1,0 +1,42 @@
+@import "bootstrap/scss/bootstrap";
+
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+.container {
+  max-width: 960px;
+}
+
+section {
+  margin-bottom: 25px;
+}
+
+.histogram {
+  font-size: 75%;
+  text-align: center;
+
+  td {
+    vertical-align: bottom;
+  }
+
+  .histogram-bar-container {
+    //display: inline-block;
+    position: relative;
+    height: 50px;
+    min-width: 12px;
+
+    .histogram-bar {
+      width: 10px;
+      background-color: red;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -5px;
+      z-index: 1;
+    }
+    .histogram-bar-count {
+      position: relative;
+      z-index: 2;
+    }
+  }
+}

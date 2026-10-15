@@ -1,0 +1,40 @@
+@import "common";
+
+
+.panel-crag {
+  margin-bottom: 25px;
+}
+
+.crag-images {
+  img {
+    max-width: 50%;
+    max-height: 400px;
+  }
+}
+
+.approach-image {
+  text-align: center;
+
+  img {
+    max-width: 80%;
+  }
+}
+
+.sector-images {
+  text-align: center;
+
+  img {
+    max-width: 80%;
+    max-height: 600px;
+  }
+}
+
+p.description, p.approach {
+  text-align: justify;
+  font-size: 90%;
+}
+
+.table-routes {
+  font-size: 80%;
+  line-height: 1.1;
+}

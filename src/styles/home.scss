@@ -1,0 +1,18 @@
+@import "common";
+
+
+table {
+  img {
+    max-height: 500px;
+    max-width: 50%;
+  }
+}
+
+.guidebooks {
+  img {
+    //max-height: 200px;
+    min-width: 100px;
+    max-width: 50%;
+  }
+
+}
