@@ -5,6 +5,7 @@ import {Sector} from "./Sector.tsx";
 import type {ApproachAPI, CragAPI, SectorAPI} from "../api.ts";
 import {NavLink} from "react-router";
 import "../styles/crag.scss"
+import axios from "axios";
 
 
 
@@ -21,30 +22,27 @@ export function Crag({crag_id}: { crag_id: string }) {
     const loaded = cragData != null && approachData != null && sectorsData != null;
 
     useEffect(() => {
-        fetch(`${config.ROOT_PATH}crags/${crag_id}.json`)
-            .then(r => r.json())
-            .then((r: CragAPI) => {
-                setCragData(r)
+        axios.get<CragAPI>(`${config.ROOT_PATH}crags/${crag_id}.json`)
+            .then(r => {
+                setCragData(r.data)
             })
             .catch(e => {
                 console.error(e);
                 setError(e)
             })
 
-        fetch(`${config.ROOT_PATH}approaches/${crag_id}.json`)
-            .then(r => r.json())
-            .then((r: ApproachAPI) => {
-                setApproachData(r)
+        axios.get<ApproachAPI>(`${config.ROOT_PATH}approaches/${crag_id}.json`)
+            .then(r => {
+                setApproachData(r.data)
             })
             .catch(e => {
                 console.error(e);
                 setError(e)
             })
 
-        fetch(`${config.ROOT_PATH}sectors/${crag_id}.json`)
-            .then(r => r.json())
-            .then((r: Sectors) => {
-                setSectorsData(r)
+        axios.get<Sectors>(`${config.ROOT_PATH}sectors/${crag_id}.json`)
+            .then(r => {
+                setSectorsData(r.data)
             })
             .catch(e => {
                 console.error(e);

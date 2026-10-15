@@ -2,16 +2,16 @@ import {useEffect, useState} from "react";
 import {LoadingSpinner} from "./utilComponents.tsx";
 import {config} from "../config.ts";
 import type {ImageAPI, SectorInstance} from "../api.ts";
+import axios from "axios";
 
 
 export function Sector({crag_id, sector_id}: { crag_id: string, sector_id: string }) {
     const [sectorData, setSectorData] = useState<SectorInstance | null>(null);
 
     useEffect(() => {
-        fetch(`${config.ROOT_PATH}sector_instance/${crag_id}_${sector_id}.json`)
-            .then(r => r.json())
-            .then((r: SectorInstance) => {
-                setSectorData(r)
+        axios.get<SectorInstance>(`${config.ROOT_PATH}sector_instance/${crag_id}_${sector_id}.json`)
+            .then(r => {
+                setSectorData(r.data)
             })
             .catch(e => {
                 console.error(e)

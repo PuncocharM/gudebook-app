@@ -4,15 +4,15 @@ import type {PurchasedGuideAPI} from "../api.ts";
 import {LoadingSpinner, Panel} from "../components/utilComponents.tsx";
 import "../styles/home.scss"
 import { NavLink } from "react-router";
+import axios from "axios";
 
 export default function Home() {
     const [purchasedGuides, setPurchasedGuides] = useState<PurchasedGuideAPI[]>()
 
     useEffect(() => {
-        fetch(config.ROOT_PATH + 'purchased_guides.json ')
-            .then(r => r.json())
-            .then((r: PurchasedGuideAPI[]) => {
-                setPurchasedGuides(r)
+        axios.get<PurchasedGuideAPI[]>(config.ROOT_PATH + 'purchased_guides.json ')
+            .then(r => {
+                setPurchasedGuides(r.data)
             })
             .catch(e => {
                 console.error(e)

@@ -9,6 +9,7 @@ import "../styles/guidebook.scss"
 import {LoadingSpinner, Panel} from "./utilComponents.tsx";
 import CragMap from "./CragMap.tsx";
 import {CragIndex} from "./CragIndex.tsx";
+import axios from "axios";
 
 export default function Guidebook({title, year}: {title: string | undefined, year: string | undefined}) {
     const [error, setError] = useState<string | null>(null);
@@ -16,10 +17,9 @@ export default function Guidebook({title, year}: {title: string | undefined, yea
 
 
     useEffect(() => {
-        fetch(config.ROOT_PATH + 'root_data.json')
-            .then(r => r.json())
-            .then((r: RootCragAPI[]) => {
-                setRootCrags(r
+        axios.get<RootCragAPI[]>(config.ROOT_PATH + 'root_data.json')
+            .then(r => {
+                setRootCrags(r.data
                     .filter(r => r.bought)
                     .filter(r => title == null || (r.guide.title == title && r.guide.year == year))
                     .sort((a,b) => Number(url_to_id(a.url)) - Number(url_to_id(b.url)))
