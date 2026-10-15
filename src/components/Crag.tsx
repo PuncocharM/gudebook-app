@@ -7,6 +7,8 @@ import {NavLink} from "react-router";
 import "../styles/crag.scss"
 import axios from "axios";
 import {Histogram} from "./CragIndex.tsx";
+import ImageGallery, {type GalleryItem} from "react-image-gallery";
+import "react-image-gallery/styles/image-gallery.css";
 
 
 interface Sectors {
@@ -64,6 +66,15 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
             <section><Panel><LoadingSpinner /></Panel></section>
         </div>
     } else {
+        const cragImages: GalleryItem[] = []
+        if (cragData.cover_image != null && cragData.images?.every(i => i.url != cragData.cover_image)) {
+            cragImages.push({'original': cragData.cover_image, });
+        }
+        if (cragData.images != null) {
+            cragData.images.forEach(i => cragImages.push({'original': i.url, 'thumbnail': i.thumbnail_url}))
+        }
+
+
         return <div className="container">
             {!print_mode &&
             <section>
@@ -84,9 +95,12 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
                         <Histogram histogram={cragData.histogram} />
                     </div>
                 </div>
-                <div className="crag-images">
-                    {(cragData.cover_image != null && cragData.images?.every(i => i.url != cragData.cover_image)) && <img src={cragData.cover_image}/>}
-                    {(cragData.images != null) && cragData.images.map(i => <img src={i.thumbnail_url}/>)}
+                <div>
+                    {cragImages && <ImageGallery
+                        items={cragImages}
+                        showThumbnails={false}
+                        showPlayButton={false}
+                    />}
                 </div>
                 <p className="description"><strong>Description: </strong>{cragData.description}</p>
                 {approachData.parking_latitude && approachData.parking_longitude &&
