@@ -40,18 +40,28 @@ export interface RootCragAPI {
     [key: string]: any,
 }
 
+export interface CoverCharacteristic {
+    name: string
+    value: string
+}
+
 export interface CragAPI {
-    name: string;
-    cover_image: string | null;
-    images: ImageAPI[] | null;
-    description: string;
-    guide: GuideAPI;
+    name: string
+    cover_image: string | null
+    images: ImageAPI[] | null
+    description: string
+    guide: GuideAPI
+    cover_characteristics: CoverCharacteristic[]
+    characteristics: string[]
+    histogram: HistogramBarAPI[]
 }
 
 export interface ApproachAPI {
     description: string;
     image: string | null;
     time: number;
+    parking_latitude: number | null;
+    parking_longitude: number | null;
 }
 
 export interface SectorAPI {
