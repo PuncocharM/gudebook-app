@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {config} from "../config.ts";
-import {LoadingSpinner, Panel} from "./utilComponents.tsx";
+import {BackHomeButton, LoadingSpinner, Panel} from "./utilComponents.tsx";
 import {Sector} from "./Sector.tsx";
 import type {ApproachAPI, CragAPI, SectorAPI} from "../api.ts";
 import {NavLink} from "react-router";
@@ -8,12 +8,11 @@ import "../styles/crag.scss"
 import axios from "axios";
 
 
-
 interface Sectors {
     sectors: SectorAPI[]
 }
 
-export function Crag({crag_id}: { crag_id: string }) {
+export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?: boolean }) {
     const [cragData, setCragData] = useState<CragAPI | null>(null);
     const [approachData, setApproachData] = useState<ApproachAPI | null>(null);
     const [sectorsData, setSectorsData] = useState<Sectors | null>(null);
@@ -52,14 +51,24 @@ export function Crag({crag_id}: { crag_id: string }) {
     }, []);
 
     if (error != null) {
-        return <div className="container"><section><Panel><p><strong>Error:</strong> {error.message}</p></Panel></section></div>
+        return <div className="container">
+            <section><BackHomeButton /></section>
+            <section><Panel>
+                <div className="alert alert-danger"><strong>Error:</strong> {error.message}</div>
+            </Panel></section>
+        </div>
     } else  if (!loaded) {
-        return <div className="container"><section><Panel><LoadingSpinner /></Panel></section></div>
+        return <div className="container">
+            <section><BackHomeButton /></section>
+            <section><Panel><LoadingSpinner /></Panel></section>
+        </div>
     } else {
         return <div className="container">
+            {!print_mode &&
             <section>
                 <NavLink to={`/guidebook/${cragData.guide.title}/${cragData.guide.year}`}><i className="bi bi-chevron-left"></i> Back to {cragData.guide.title} ({cragData.guide.year})</NavLink>
             </section>
+            }
             <section>
                 <a id={`crag-${crag_id}`}></a>
                 <h3>{cragData.name}</h3>

@@ -6,13 +6,13 @@ import {url_to_id} from "../utils.ts";
 import {NavLink} from "react-router";
 
 import "../styles/guidebook.scss"
-import {LoadingSpinner, Panel} from "./utilComponents.tsx";
+import {BackHomeButton, LoadingSpinner, Panel} from "./utilComponents.tsx";
 import CragMap from "./CragMap.tsx";
 import {CragIndex} from "./CragIndex.tsx";
 import axios from "axios";
 
 export default function Guidebook({title, year}: {title: string | undefined, year: string | undefined}) {
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<Error | null>(null);
     const [rootCrags, setRootCrags] = useState<RootCragAPI[]>([]);
 
 
@@ -32,16 +32,22 @@ export default function Guidebook({title, year}: {title: string | undefined, yea
     }, [])
 
     if (error != null) {
-        return <div className="container"><section><Panel><p><strong>Error:</strong> {error}</p></Panel></section></div>
+        return <div className="container">
+            <section><BackHomeButton /></section>
+            <section><Panel><div className="alert alert-danger"><strong>Error:</strong> {error.message}</div></Panel></section>
+        </div>
     } else if (rootCrags == null) {
-        return <div className="container"><section><Panel><LoadingSpinner /></Panel></section></div>
+        return <div className="container">
+            <section><BackHomeButton /></section>
+            <section><Panel><LoadingSpinner /></Panel></section>
+        </div>
     } else {
         return <div className="container">
             <section>
                 <NavLink to="/"><i className="bi bi-chevron-left"></i> Back to Guidebooks</NavLink>
             </section>
             <section>
-                {title == null ? <h1>All crags</h1>: <h1>{title} ({year})</h1>}
+                {title == null ? <h1>All crags</h1>: <h1>{title} ({year}) <NavLink className="link-print" to="./print"><i className="bi bi-printer"></i></NavLink></h1>}
 
                 <CragMap crags={rootCrags} guidebookId={title + '-' + year} />
 

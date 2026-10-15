@@ -1,4 +1,5 @@
 import type {ReactNode} from "react";
+import {useNavigate} from "react-router";
 
 export function Panel({children, header, className, ...other_props}: { children?: React.ReactNode, header?: React.ReactNode, className?: string; [other_props: string]: any }) {
     return <div className={"card" + (className != null ? " "+className : "")} {...other_props}>
@@ -21,4 +22,9 @@ export function Badge(props: { children: ReactNode }) {
 
 export function NBSpace() {
     return <span className="nbspace">&nbsp;</span>
+}
+
+export function BackHomeButton() {
+    const navigate = useNavigate();
+    return <button onClick={() => navigate("/")}>← Back to home page</button>;
 }

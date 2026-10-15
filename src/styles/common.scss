@@ -5,10 +5,15 @@ $bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
 
 .container {
   max-width: 960px;
+  padding-top: .5rem;
 }
 
 section {
   margin-bottom: 25px;
+}
+
+.link-print {
+  float: right;
 }
 
 .histogram {

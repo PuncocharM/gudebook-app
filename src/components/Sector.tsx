@@ -7,6 +7,7 @@ import axios from "axios";
 
 export function Sector({crag_id, sector_id}: { crag_id: string, sector_id: string }) {
     const [sectorData, setSectorData] = useState<SectorInstance | null>(null);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         axios.get<SectorInstance>(`${config.ROOT_PATH}sector_instance/${crag_id}_${sector_id}.json`)
@@ -14,11 +15,14 @@ export function Sector({crag_id, sector_id}: { crag_id: string, sector_id: strin
                 setSectorData(r.data)
             })
             .catch(e => {
+                setError(e)
                 console.error(e)
             })
     })
 
-    if (sectorData == null) {
+    if (error != null) {
+        return <div className="alert alert-danger"><strong>Error: </strong>{error.message}</div>
+    } else if (sectorData == null) {
         return <LoadingSpinner />
     } else {
         return <div>
