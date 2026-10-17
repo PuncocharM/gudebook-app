@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import type {RootCragAPI} from "../api.ts";
+import type {RootCragAPI} from "../api/vs.ts";
 import axios from "axios";
 import {config} from "../config.ts";
 import {url_to_id} from "../utils.ts";

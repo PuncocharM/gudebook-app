@@ -1,6 +1,6 @@
 
 import {useEffect, useState} from "react";
-import type {RootCragAPI} from "../api.ts";
+import type {RootCragAPI} from "../api/vs.ts";
 import {config} from "../config.ts";
 import {url_to_id} from "../utils.ts";
 import {NavLink} from "react-router";

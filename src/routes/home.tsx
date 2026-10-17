@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {config} from "../config.ts";
-import type {PurchasedGuideAPI} from "../api.ts";
+import type {PurchasedGuideAPI} from "../api/vs.ts";
 import {LoadingSpinner, Panel} from "../components/utilComponents.tsx";
 import "../styles/home.scss"
 import { NavLink } from "react-router";

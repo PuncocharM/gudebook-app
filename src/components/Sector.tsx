@@ -1,16 +1,17 @@
 import {useEffect, useState} from "react";
 import {LoadingSpinner} from "./utilComponents.tsx";
 import {config} from "../config.ts";
-import type {ImageAPI, SectorInstance} from "../api.ts";
+import type {ImageAPI, SectorInstance} from "../api/vs.ts";
 import axios from "axios";
+import {A8Search} from "./a8Search.tsx";
 
 
-export function Sector({crag_id, sector_id}: { crag_id: string, sector_id: string }) {
+export function Sector({cragId, sectorId, cragName}: { cragId: string, sectorId: string, cragName: string }) {
     const [sectorData, setSectorData] = useState<SectorInstance | null>(null);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        axios.get<SectorInstance>(`${config.ROOT_PATH}sector_instance/${crag_id}_${sector_id}.json`)
+        axios.get<SectorInstance>(`${config.ROOT_PATH}sector_instance/${cragId}_${sectorId}.json`)
             .then(r => {
                 setSectorData(r.data)
             })
@@ -48,6 +49,7 @@ export function Sector({crag_id, sector_id}: { crag_id: string, sector_id: strin
                         {i>0 && <br/>}
                             {r.pitches.length > 1 && p.name} {p.difficulty_grade} {p.length}m {p.comment}
                         </>)}</>)}</td>
+                        <td><A8Search routeName={r.name} cragName={cragName} /></td>
                     </tr>)}
                     </tbody>
                 </table>

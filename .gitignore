@@ -26,3 +26,4 @@ dist-ssr
 /public/database/
 /build/
 /.react-router/
+/token.txt

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {config} from "../config.ts";
 import {BackHomeButton, Badge, LoadingSpinner, NBSpace, Panel} from "./utilComponents.tsx";
 import {Sector} from "./Sector.tsx";
-import type {ApproachAPI, CragAPI, SectorAPI} from "../api.ts";
+import type {ApproachAPI, CragAPI, SectorAPI} from "../api/vs.ts";
 import {NavLink} from "react-router";
 import "../styles/crag.scss"
 import axios from "axios";
@@ -116,7 +116,7 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
                             src="https://mapy.com/img/favicon/common/plain/favicon-32x32.png" alt="Mapy.cz"/></a>
                         <NBSpace />
                         <a target="_blank"
-                           href={`https://maps.google.com/?q=${approachData.parking_longitude},${approachData.parking_latitude}&marker=true`}><img
+                           href={`https://maps.google.com/?q=${approachData.parking_latitude},${approachData.parking_longitude}&marker=true`}><img
                             src="https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico" alt="Google maps" /></a>
                     </p>
                 }
@@ -128,7 +128,7 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
                 <div className="approach-image">
                     <img src={`${config.ROOT_PATH}images_optimized_approaches/${approachData.image.split('/').slice(-1)[0]}.jpg`} alt="Approach image" />
                 </div>}
-                {sectorsData.sectors.map(sector => <Sector crag_id={crag_id} sector_id={sector.url.split('/').slice(-2)[0]} />)}
+                {sectorsData.sectors.map(sector => <Sector cragId={crag_id} sectorId={sector.url.split('/').slice(-2)[0]} cragName={cragData.name} />)}
             </section>
         </div>
     }

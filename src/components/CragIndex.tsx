@@ -1,5 +1,5 @@
 import {Badge, NBSpace} from "./utilComponents.tsx";
-import type {HistogramBarAPI, RootCragAPI} from "../api.ts";
+import type {HistogramBarAPI, RootCragAPI} from "../api/vs.ts";
 import {url_to_id, usePersistentState} from "../utils.ts";
 import * as React from "react";
 import {NavLink} from "react-router";

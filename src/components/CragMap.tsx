@@ -1,4 +1,4 @@
-import type {RootCragAPI} from "../api.ts";
+import type {RootCragAPI} from "../api/vs.ts";
 import {MapContainer, Marker, Popup, TileLayer, useMapEvents} from "react-leaflet";
 import {url_to_id, usePersistentState} from "../utils.ts";
 import {NavLink} from "react-router";
