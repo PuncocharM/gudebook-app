@@ -16,13 +16,13 @@ export function Sector({cragId, sectorId, cragName}: { cragId: string, sectorId:
                 setSectorData(r.data)
             })
             .catch(e => {
-                setError(e)
                 console.error(e)
+                setError(e)
             })
-    })
+    }, [])
 
     if (error != null) {
-        return <div className="alert alert-danger"><strong>Error: </strong>{error.message}</div>
+        return <div className="alert alert-danger"><strong>Error loading sector: </strong>{error.name} / {error.message}</div>
     } else if (sectorData == null) {
         return <LoadingSpinner />
     } else {

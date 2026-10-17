@@ -48,7 +48,6 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
             })
             .catch(e => {
                 console.error(e);
-                console.error(e);
                 setError(e);
             })
     }, []);
@@ -57,7 +56,7 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
         return <div className="container">
             <section><BackHomeButton /></section>
             <section><Panel>
-                <div className="alert alert-danger"><strong>Error:</strong> {error.message}</div>
+                <div className="alert alert-danger"><strong>Error loading crag data:</strong> {error.name} / {error.message}</div>
             </Panel></section>
         </div>
     } else  if (!loaded) {
