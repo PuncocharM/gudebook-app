@@ -3,7 +3,7 @@ import {LoadingSpinner} from "./utilComponents.tsx";
 import {config} from "../config.ts";
 import type {ImageAPI, SectorInstance} from "../api/vs.ts";
 import axios from "axios";
-import {A8Search} from "./a8Search.tsx";
+import {A8SearchRoute} from "./a8Search.tsx";
 
 
 export function Sector({cragId, sectorId, cragName}: { cragId: string, sectorId: string, cragName: string }) {
@@ -49,7 +49,7 @@ export function Sector({cragId, sectorId, cragName}: { cragId: string, sectorId:
                         {i>0 && <br/>}
                             {r.pitches.length > 1 && p.name} {p.difficulty_grade} {p.length}m {p.comment}
                         </>)}</>)}</td>
-                        <td><A8Search routeName={r.name} cragName={cragName} /></td>
+                        <td><A8SearchRoute routeName={r.name} cragName={cragName} /></td>
                     </tr>)}
                     </tbody>
                 </table>

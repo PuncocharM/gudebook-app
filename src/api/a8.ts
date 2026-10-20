@@ -17,6 +17,7 @@ export interface A8SearchItem {
     flashOnsightRate: number
     totalRecommendedRate: number
     averageRating: number
+    totalZlaggables: number
     score: number
     type: number
 }

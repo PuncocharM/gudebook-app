@@ -9,6 +9,7 @@ import axios from "axios";
 import {Histogram} from "./CragIndex.tsx";
 import ImageGallery, {type GalleryItem} from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
+import {A8SearchCrag} from "./a8Search.tsx";
 
 
 interface Sectors {
@@ -92,6 +93,11 @@ export function Crag({crag_id, print_mode=false}: { crag_id: string, print_mode?
                     </div>
                     <div className="mt-1 bg-dark-subtle p-2 d-inline-block rounded-2">
                         <Histogram histogram={cragData.histogram} />
+                    </div>
+                    <div className="row">
+                        <div className="col-1">
+                        <A8SearchCrag cragName={cragData.name} />
+                        </div>
                     </div>
                 </div>
                 <div>
