@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 
 export function url_to_id(url: string) {
     return url.split('/').slice(-2)[0];
@@ -24,4 +24,12 @@ export function usePersistentState<Type>(key: string, initialState: Type | (() =
         localStorage.setItem(prefixedKey, JSON.stringify(value));
     }, [value, prefixedKey]);
     return [value, setValue];
+}
+
+export function normalizeText(s: string): string {
+    return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
+}
+
+export function ceilToStep(value: number, step: number): number {
+    return Math.max(step, Math.ceil(value / step) * step)
 }

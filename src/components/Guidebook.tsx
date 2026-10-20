@@ -5,7 +5,6 @@ import {config} from "../config.ts";
 import {url_to_id} from "../utils.ts";
 import {NavLink} from "react-router";
 
-import "../styles/guidebook.scss"
 import {BackHomeButton, LoadingSpinner, Panel} from "./utilComponents.tsx";
 import CragMap from "./CragMap.tsx";
 import {CragIndex} from "./CragIndex.tsx";
@@ -49,11 +48,11 @@ export default function Guidebook({title, year}: {title: string | undefined, yea
             <section>
                 {title == null ? <h1>All crags</h1>: <h1>{title} ({year}) <NavLink className="link-print" to="./print"><i className="bi bi-printer"></i></NavLink></h1>}
 
-                <CragMap crags={rootCrags} guidebookId={title + '-' + year} />
-
-                <div className="table-responsive">
-                    <CragIndex crags={rootCrags}/>
+                <div className="mb-3">
+                    <CragMap crags={rootCrags} guidebookId={title + '-' + year} />
                 </div>
+
+                <CragIndex crags={rootCrags}/>
             </section>
 
         </div>
